@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  docker: circleci/docker@2.2.0  # CircleCI Docker orb for build and push
+  docker: circleci/docker@2.2.0  # CircleCI Docker orb pour build et push
 
 jobs:
   build:
@@ -10,12 +10,10 @@ jobs:
     steps:
       - checkout
       - docker/build:
-          name: Build Docker image
           image: node-js-server
           dockerfile: Dockerfile
           path: .
       - docker/push:
-          name: Push to Docker Hub
           image: $DOCKERHUB_USERNAME/node-js-server
           tag: latest
 
@@ -24,4 +22,3 @@ workflows:
   build-and-deploy:
     jobs:
       - build
-
