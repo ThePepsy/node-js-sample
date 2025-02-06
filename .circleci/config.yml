@@ -22,11 +22,11 @@ jobs:
           name: Test the application with wget
           command: wget -qO- http://localhost:8080/
       - run:
-          name: Push sur Docker Hub
+          name: Push to Docker Hub
           command: |
-            echo "yYqydbOlT07hnC" | docker login -u "thepepsy" --password-stdin
-            docker tag node-js-server:latest thepepsy/node-js-server:latest
-            docker push thepepsy/node-js-server:latest
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker tag node-js-server:latest $DOCKERHUB_USERNAME/node-js-server:latest
+            docker push $DOCKERHUB_USERNAME/node-js-server:latest
 
 workflows:
   version: 2
