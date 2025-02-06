@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  docker: circleci/docker@2.2.0  # Assure-toi de spécifier la bonne version de l'orb Docker
+  docker: circleci/docker@2.2.0  # Assure-toi que la version correcte est utilisée
 
 jobs:
   build:
@@ -9,9 +9,13 @@ jobs:
       image: ubuntu-2204:current
     steps:
       - checkout
-      - docker/publish:
+      - docker/build-and-push:
+          name: Build and Push Docker Image
           image: $DOCKERHUB_USERNAME/$DOCKERHUB_REPONAME
-          update-description: true
+          tag: latest
+          path: .
+          dockerfile: Dockerfile
+          push: true
 
 workflows:
   version: 2
