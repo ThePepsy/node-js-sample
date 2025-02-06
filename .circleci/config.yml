@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  docker: circleci/docker@2.8.2  # CircleCI Docker orb pour build et push
+  docker: circleci/docker@2.2.0  # Assure-toi de spécifier la bonne version de l'orb Docker
 
 jobs:
   build:
@@ -9,13 +9,9 @@ jobs:
       image: ubuntu-2204:current
     steps:
       - checkout
-      - docker/build:
-          image: node-js-server  # Le nom de l'image à construire
-          dockerfile: Dockerfile  # Le Dockerfile à utiliser
-          path: .  # Le répertoire contenant le Dockerfile
-      - docker/push:
-          image: $DOCKERHUB_USERNAME/node-js-server  # Pousser sur Docker Hub avec ce nom d'image
-          tag: latest  # Le tag à utiliser pour cette image
+      - docker/publish:
+          image: $DOCKERHUB_USERNAME/$DOCKERHUB_REPONAME
+          update-description: true
 
 workflows:
   version: 2
