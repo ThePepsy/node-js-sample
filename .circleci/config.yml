@@ -10,12 +10,12 @@ jobs:
     steps:
       - checkout
       - docker/build:
-          image: node-js-server
-          dockerfile: Dockerfile
-          path: .
+          image: node-js-server  # Le nom de l'image à construire
+          dockerfile: Dockerfile  # Le Dockerfile à utiliser
+          path: .  # Le répertoire contenant le Dockerfile
       - docker/push:
-          image: $DOCKERHUB_USERNAME/node-js-server
-          tag: latest
+          image: $DOCKERHUB_USERNAME/node-js-server  # Pousser sur Docker Hub avec ce nom d'image
+          tag: latest  # Le tag à utiliser pour cette image
 
 workflows:
   version: 2
